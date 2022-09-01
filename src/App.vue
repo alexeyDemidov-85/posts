@@ -1,15 +1,28 @@
 <template>
     <div id="nav">
         <router-link :to="{ name: 'Posts' }">Posts</router-link> |
-        <router-link :to="{ name: 'Post', params: { id: 2 } }">
-            Show Post
-        </router-link>
-        |
         <router-link :to="{ name: 'CreatePost' }">Create Post</router-link>
     </div>
     <router-view />
 </template>
 
+<script>
+export default {
+    name: 'App',
+    created() {
+        this.fetchAllUsers()
+    },
+    methods: {
+        fetchAllUsers() {
+            return this.$store
+                .dispatch('users/fetchAllUsers')
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+    },
+}
+</script>
 <style>
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
